@@ -92,9 +92,10 @@ SECURE_HSTS_PRELOAD = not DEBUG
 
 WSGI_APPLICATION = 'EmotionMusicRec.wsgi.application'
 
-DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
-    }
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+database_url = database_url.replace(':[', ':').replace(']@', '@')
+database_url = database_url.replace('@[', '@').replace(']:', ':')
+DATABASES = {'default': dj_database_url.parse(database_url)}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
