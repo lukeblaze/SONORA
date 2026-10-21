@@ -24,7 +24,7 @@ The repository already contains a `Procfile`. Create a Python web service from t
 - `DJANGO_CSRF_TRUSTED_ORIGINS`: the deployed HTTPS origin, such as `https://your-app.onrender.com`
 - `DATABASE_URL`: the provider's managed PostgreSQL connection string
 
-The included `render.yaml` can create the web service and PostgreSQL database on Render. The production requirements intentionally exclude TensorFlow so the web service stays deployable on a small instance. The app reports demo mode until `requirements-ml.txt` is installed on a worker with enough memory for model inference.
+The included `render.yaml` creates only the web service, so the first deployment can use Render's free web plan without billing information. It uses SQLite for this demo deployment; add a managed PostgreSQL database later when accounts, history, and persistent preferences are enabled. The production requirements intentionally exclude TensorFlow so the web service stays deployable on a small instance. The app reports demo mode until `requirements-ml.txt` is installed on a worker with enough memory for model inference.
 
 ## GitHub
 
