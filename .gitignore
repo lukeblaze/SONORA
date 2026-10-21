@@ -10,6 +10,9 @@ staticfiles/
 media/*
 !media/.gitkeep
 *.msi
+*.exe
+*-- SQLite.sql
+emotion_detection/emotion_model.pkl
 db.sqlite3
 db.sqlite3-journal
 
