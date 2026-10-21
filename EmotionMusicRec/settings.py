@@ -19,8 +19,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Django settings for EmotionMusicRec project.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'local-development-only-key')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
+vercel_host = os.environ.get('VERCEL_URL')
+default_hosts = '127.0.0.1,localhost'
+if vercel_host:
+    default_hosts += ',' + vercel_host
 ALLOWED_HOSTS = [host.strip() for host in os.environ.get(
-    'DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost'
+    'DJANGO_ALLOWED_HOSTS', default_hosts
 ).split(',') if host.strip()]
 
 INSTALLED_APPS = [
@@ -75,6 +79,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get(
     'DJANGO_CSRF_TRUSTED_ORIGINS', ''
 ).split(',') if origin.strip()]
+if vercel_host and f'https://{vercel_host}' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{vercel_host}')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = not DEBUG
