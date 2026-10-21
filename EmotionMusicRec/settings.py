@@ -26,6 +26,8 @@ if vercel_host:
 ALLOWED_HOSTS = [host.strip() for host in os.environ.get(
     'DJANGO_ALLOWED_HOSTS', default_hosts
 ).split(',') if host.strip()]
+if vercel_host and vercel_host not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(vercel_host)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
