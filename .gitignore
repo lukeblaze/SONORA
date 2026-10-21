@@ -1,0 +1,15 @@
+node_modules
+venv/
+.venv/
+emotion_detection/datasets/fer2013.csv
+__pycache__/
+*.py[cod]
+.env
+.env.*
+staticfiles/
+media/*
+!media/.gitkeep
+*.msi
+db.sqlite3
+db.sqlite3-journal
+
